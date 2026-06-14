@@ -29,8 +29,8 @@ def main() -> int:
     model = SimpleMLP(
         NetworkConfig(
             input_size=x_train.shape[1],
-            hidden_size1=256,
-            hidden_size2=128,
+            hidden_size1=512,
+            hidden_size2=256,
             output_size=10,
             learning_rate=LEARNING_RATE,
             batch_size=BATCH_SIZE,
