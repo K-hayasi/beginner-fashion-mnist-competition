@@ -2,14 +2,24 @@
 
 import pickle
 from pathlib import Path
+import sys
+import traceback
 
-from load_fashion_mnist import load_train_data
-from network import NetworkConfig, SimpleMLP
+# package-aware imports: allow running as script or as package
+try:
+    from src.load_fashion_mnist import load_train_data  # type: ignore
+except Exception:
+    from load_fashion_mnist import load_train_data
+
+try:
+    from src.network import NetworkConfig, SimpleMLP  # type: ignore
+except Exception:
+    from network import NetworkConfig, SimpleMLP
 
 OUTPUT_PATH = Path("sample_weight.pkl")
 EPOCHS = 20
 HIDDEN_SIZE = 256
-LEARNING_RATE = 0.1
+LEARNING_RATE = 0.01
 BATCH_SIZE = 128
 SEED = 42
 
@@ -45,4 +55,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception:
+        traceback.print_exc()
+        sys.exit(1)

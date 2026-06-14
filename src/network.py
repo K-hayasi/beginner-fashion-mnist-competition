@@ -44,7 +44,8 @@ class SimpleMLP:
         }
 
     def predict_proba(self, x: np.ndarray) -> np.ndarray:
-        z1 = np.tanh(np.dot(x, self.params["W1"]) + self.params["b1"])
+        z1_linear = np.dot(x, self.params["W1"]) + self.params["b1"]
+        z1 = np.maximum(0, z1_linear)
         logits = np.dot(z1, self.params["W2"]) + self.params["b2"]
         return _softmax(logits)
 
@@ -75,7 +76,7 @@ class SimpleMLP:
             y_batch = y[batch_idx]
 
             z1_linear = np.dot(x_batch, self.params["W1"]) + self.params["b1"]
-            z1 = np.tanh(z1_linear)
+            z1 = np.maximum(0, z1_linear)
             logits = np.dot(z1, self.params["W2"]) + self.params["b2"]
             probs = _softmax(logits)
 
@@ -89,7 +90,7 @@ class SimpleMLP:
             db2 = np.sum(d_logits, axis=0)
 
             d_z1 = np.dot(d_logits, self.params["W2"].T)
-            d_z1_linear = d_z1 * (1.0 - np.square(z1))
+            d_z1_linear = d_z1 * (z1_linear > 0)
             dW1 = np.dot(x_batch.T, d_z1_linear)
             db1 = np.sum(d_z1_linear, axis=0)
 
