@@ -17,9 +17,8 @@ except Exception:
     from network import NetworkConfig, SimpleMLP
 
 OUTPUT_PATH = Path("sample_weight.pkl")
-EPOCHS = 20
-HIDDEN_SIZE = 256
-LEARNING_RATE = 0.01
+EPOCHS = 18
+LEARNING_RATE = 0.05
 BATCH_SIZE = 128
 SEED = 42
 
@@ -30,7 +29,8 @@ def main() -> int:
     model = SimpleMLP(
         NetworkConfig(
             input_size=x_train.shape[1],
-            hidden_size=HIDDEN_SIZE,
+            hidden_size1=256,
+            hidden_size2=128,
             output_size=10,
             learning_rate=LEARNING_RATE,
             batch_size=BATCH_SIZE,
