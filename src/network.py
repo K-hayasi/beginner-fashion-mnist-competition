@@ -21,7 +21,7 @@ def _one_hot(labels: np.ndarray, num_classes: int) -> np.ndarray:
 @dataclass
 class NetworkConfig:
     input_size: int = 784
-    hidden_size: int = 64
+    hidden_size: int = 256
     output_size: int = 10
     learning_rate: float = 0.1
     batch_size: int = 128
