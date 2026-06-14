@@ -8,7 +8,7 @@ from network import NetworkConfig, SimpleMLP
 
 OUTPUT_PATH = Path("sample_weight.pkl")
 EPOCHS = 20
-HIDDEN_SIZE = 64
+HIDDEN_SIZE = 256
 LEARNING_RATE = 0.1
 BATCH_SIZE = 128
 SEED = 42
